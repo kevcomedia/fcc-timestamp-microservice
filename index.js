@@ -1,26 +1,8 @@
-const express = require('express')
-const toTimestampJson = require('./toTimestampJson')
-const app = express()
+const http = require('http')
+const app = require('./app')
 
-app.set('view engine', 'pug')
-
-app.use('/assets', express.static(__dirname + '/public'))
-
-app.get('/', (request, response) => {
-  const { protocol, hostname } = request
-  response.render('index', { host: `${protocol}://${hostname}` })
-})
-
-app.get('/api/timestamp', (request, response) => {
-  response.json(toTimestampJson())
-})
-
-app.get('/api/timestamp/:dateString', (request, response) => {
-  const { dateString } = request.params
-  response.json(toTimestampJson(dateString))
-})
-
+const server = http.createServer(app)
 const port = process.env.PORT || 3000
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`App listening to port ${port}`)
 })
