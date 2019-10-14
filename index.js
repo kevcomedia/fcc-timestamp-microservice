@@ -26,8 +26,13 @@ function toTimestampJson(dateString) {
   }
 }
 
+app.set('view engine', 'pug')
+
+app.use('/assets', express.static(__dirname + '/public'))
+
 app.get('/', (request, response) => {
-  response.send('Hello world')
+  const { protocol, hostname } = request
+  response.render('index', { host: `${protocol}://${hostname}` })
 })
 
 app.get('/api/timestamp', (request, response) => {

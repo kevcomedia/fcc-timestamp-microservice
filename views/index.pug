@@ -1,0 +1,25 @@
+doctype html
+html(lang='en-us')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    title freeCodeCamp Timestamp Microservice
+    link(rel='stylesheet' href='assets/styles.css')
+
+  body
+    h1 Timestamp Microservice
+
+    h2 Example Usage
+    ul
+      each dateString in ['1499990400000', '2017-07-14']
+        li
+          - var endpoint = `api/timestamp/${dateString}`
+          - var linkText = host + '/' + endpoint
+          a(href=endpoint)= linkText
+    p Both will give this response:
+    p
+      samp {"unix":1499990400000,"utc":"Fri, 14 Jul 2017 00:00:00 GMT"}
+
+    footer
+      p
+        a(href='https://github.com/kevcomedia/fcc-timestamp-microservice' target='_blank') GitHub
